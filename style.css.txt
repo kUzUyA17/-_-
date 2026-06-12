@@ -1,0 +1,169 @@
+/* Обнуляем отступы и задаём box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #F8FAFC;
+    color: #1E293B;
+    line-height: 1.5;
+}
+
+/* Контейнер-родитель для двух колонок */
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ----- Левая боковая панель (меню) ----- */
+.sidebar {
+    width: 280px;
+    background-color: #F1F4F9;
+    padding: 150px 0 0 50px;   /* Y=150, X=50 как в макете */
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    border-right: none; /* убираем линию, если не нужна */
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.menu-item {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;   /* Regular по макету, но 500 — полужирный для читаемости */
+    color: #2E3B4E;     /* точный цвет из Figma */
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0;
+}
+
+.menu-item:hover {
+    color: #0F172A;
+}
+
+.menu-item.active {
+    color: #0F172A;
+    font-weight: 600;
+    position: relative;
+}
+
+/* активный пункт с точкой (как в макете? добавим элегантный индикатор) */
+.menu-item.active::before {
+    content: "—";
+    position: absolute;
+    left: -20px;
+    color: #0F172A;
+}
+
+/* ----- Правая колонка (контент) ----- */
+.content {
+    flex: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 60px 120px 60px;  /* увеличенные отступы для воздуха */
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.02), 0 2px 12px rgba(0,0,0,0.04);
+    position: relative;
+    z-index: 1;
+}
+
+/* Размытая картинка вверху правой колонки (hero) */
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 360px;
+    background-image: url('images/for.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(12px);
+    opacity: 0.5;
+    z-index: -1;
+    border-radius: 0;
+    pointer-events: none;
+}
+
+/* Если хочешь заменить на свою картинку, просто поменяй URL выше.
+   Можно использовать локальный файл, например 'my-fog.jpg'.
+   Для тени веток рекомендую фото с Unsplash: "foggy forest" или "blurred branches". */
+
+/* Стили для каждого произведения */
+.post {
+    margin-bottom: 56px;
+    position: relative;
+    z-index: 1;
+}
+
+.post h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 500;
+    color: #1E293B;
+    margin-bottom: 24px;
+    letter-spacing: -0.3px;
+}
+
+.post p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #475569;
+    margin-bottom: 20px;
+}
+
+/* Разделитель между текстами — тонкая линия, как в макете */
+.divider {
+    border: none;
+    border-top: 1px solid #E2E8F0;
+    width: 80px;
+    margin: 0 0 56px 0;
+}
+
+/* Адаптивность */
+max-width: 900px {
+    .sidebar {
+        width: 240px;
+        padding: 120px 0 0 30px;
+    }
+    .content {
+        padding: 60px 40px;
+    }
+    .post h2 {
+        font-size: 30px;
+    }
+}
+
+max-width: 680px {
+    .container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        padding: 30px 20px;
+    }
+    .menu {
+        flex-direction: row;
+        justify-content: center;
+        gap: 30px;
+    }
+    .menu-item.active::before {
+        display: none;
+    }
+    .content {
+        padding: 40px 24px 80px;
+    }
+    .hero-image {
+        height: 200px;
+        filter: blur(8px);
+    }
+}
