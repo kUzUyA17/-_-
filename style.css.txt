@@ -1,0 +1,169 @@
+/* ----- Базовые сбросы ----- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #F8FAFC;  /* общий фон страницы */
+    color: #1E293B;
+    line-height: 1.5;
+}
+
+/* ----- Контейнер для двух колонок ----- */
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ----- ЛЕВАЯ ПАНЕЛЬ (меню) ----- */
+.sidebar {
+    width: 280px;               /* ширина по макету (относительно X=370) */
+    background-color: #F1F4F9;  /* цвет из Figma */
+    padding: 150px 0 0 50px;    /* Y=150, X=50 */
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;                  /* расстояние между пунктами (Y Writings = 210, при высоте Home ~36, gap=24) */
+}
+
+.menu-item {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: #2E3B4E;            /* цвет из Figma */
+    text-decoration: none;
+    transition: color 0.2s ease;
+    letter-spacing: 0;
+}
+
+.menu-item:hover {
+    color: #0F172A;
+}
+
+.menu-item.active {
+    color: #0F172A;
+    font-weight: 600;
+    /* без дополнительных точек — по запросу убрали */
+}
+
+/* ----- ПРАВАЯ КОЛОНКА (контент) ----- */
+.content {
+    flex: 1;
+    background-color: #F8FAFC;  /* фон правой колонки из Figma */
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.02), 0 4px 12px rgba(0,0,0,0.05); /* лёгкая тень */
+    position: relative;
+    z-index: 1;
+}
+
+/* Размытая картинка вверху (высота 250px) */
+.hero-image {
+    height: 250px;
+    width: 100%;
+    background-image: url('https://images.pexels.com/photos/2098314/pexels-photo-2098314.jpeg?auto=compress&cs=tinysrgb&w=1600');
+    background-size: cover;
+    background-position: center 30%;
+    filter: blur(12px);
+    opacity: 0.6;
+    transform: scale(1.02);
+    pointer-events: none;
+    /* не влияет на клики */
+}
+
+/* Контейнер для текста (отступы по макету: X=370, значит padding-left = 370 - 280 = 90px) */
+.text-container {
+    max-width: 860px;           /* ограничиваем ширину для комфортного чтения */
+    padding: 40px 90px 120px 90px;  /* сверху отступ после картинки, слева 90px, справа 90px, снизу много */
+    margin: 0 auto;             /* центрируем при широком экране */
+}
+
+/* ----- Стили для каждого произведения ----- */
+.post {
+    margin-bottom: 56px;        /* расстояние между произведениями (в макете нет разделителей) */
+}
+
+.post h1,
+.post h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    color: #2E3B4E;            /* цвет заголовков из Figma */
+    margin-bottom: 20px;        /* отступ от заголовка до первого абзаца */
+    letter-spacing: -0.3px;
+}
+
+.post h1 {
+    font-size: 34px;
+}
+
+.post h2 {
+    font-size: 28px;
+    margin-top: 0;
+}
+
+.post p {
+    font-size: 18px;            /* размер текста 18px */
+    line-height: 1.65;          /* комфортный межстрочный интервал (Auto в Figma, но задаём явно) */
+    color: #5C6A7A;            /* цвет абзацев из Figma */
+    margin-bottom: 20px;        /* расстояние между абзацами внутри одного произведения */
+}
+
+/* последний абзац в посте не должен иметь нижний отступ — управляется через .post */
+.post p:last-child {
+    margin-bottom: 0;
+}
+
+/* ----- АДАПТИВНОСТЬ (мобильные устройства) ----- */
+max-width: 768px {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        padding: 20px 16px;
+        text-align: center;
+    }
+    .menu {
+        flex-direction: row;
+        justify-content: center;
+        gap: 32px;
+    }
+    .content {
+        box-shadow: none;
+    }
+    .hero-image {
+        height: 180px;
+        filter: blur(8px);
+    }
+    .text-container {
+        padding: 24px 24px 80px 24px;
+    }
+    .post h1 {
+        font-size: 30px;
+    }
+    .post h2 {
+        font-size: 26px;
+    }
+    .post p {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+}
+
+/* Планшеты */
+min-width: 769px and (max-width: 1024px) {
+    .text-container {
+        padding: 40px 60px
+
+
+100px 60px;
+    }
+    .sidebar {
+        padding: 150px 0 0 30px;
+    }
+}
